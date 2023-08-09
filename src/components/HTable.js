@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { HotTable } from '@handsontable/react';
 import { registerAllModules } from 'handsontable/registry';
 import { registerLanguageDictionary, zhCN } from 'handsontable/i18n';
@@ -17,31 +17,6 @@ const l = `data = [
 
 const HTable = () => {
   const hotRef = useRef(null);
-  const [output, setOutput] = useState('');
-
-  const [val, setVal] = useState('')
-  const [data, setData] = useState([])
-
-  let getButtonClickCallback;
-
-  useEffect(() => {
-    const hot = hotRef.current.hotInstance;
-
-    getButtonClickCallback = event => {
-      const selected = hot.getSelected() || [];
-      const data = [];
-      // selected [起点行数, 起点列数, 终点行数, 终点列数]
-      console.log('----', selected)
-
-      for (let i = 0; i < selected.length; i += 1) {
-        const item = selected[i];
-
-        data.push(hot.getData(...item));
-      }
-
-      setOutput(JSON.stringify(data));
-    };
-  });
 
   return (
     <div style={{ padding: '24px'}}>
@@ -55,18 +30,6 @@ const HTable = () => {
         <pre>{l}</pre>
       </div>
 
-      <div>
-        <textarea value={val} onChange={(e) => {
-          const a = e.target.value
-          // console.log(a)
-          setVal(a)
-        }} />
-        <button onClick={() => {
-          console.log(val)
-          // console.log(JSON.parse(val))
-          // setData(JSON.parse(val))
-        }}>提交</button>
-      </div>
       <HotTable
         data={[
           ['', '2019', '2020', '2021', '2022'],
@@ -80,25 +43,16 @@ const HTable = () => {
         // colHeaders
         // rowHeaders
         copyPaste={{
-          beforePaste: (a,b,c) => console.log(a,b,c)
+          beforePaste: (a,b,c) => console.log(a,b,c) // 监听粘贴事件
         }}
-        mergeCells
-        contextMenu
+        mergeCells // 合并单元格
+        contextMenu // 右键菜单
         width="600"
         height="300"
         stretchH="all"
         language={zhCN.languageCode}
         licenseKey="non-commercial-and-evaluation"
       />
-      <output id="output">{output}</output>
-      <div>
-        <button
-          id="getButton"
-          onClick={(...args) => getButtonClickCallback(...args)}
-        >
-          Get data
-        </button>
-      </div>
     </div>
   )
 };
