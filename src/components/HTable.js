@@ -133,8 +133,8 @@ const HTable = () => {
         copyPaste={{
           beforePaste: (a,b,c) => console.log(a,b,c) // 监听粘贴事件
         }}
-        // mergeCells={configData.mergeData} // 合并单元格
-        // cellMap={Object.values(readOnlyCellMap(configData.cellMap))}
+        mergeCells={configData.mergeData} // 合并单元格
+        cell={Object.values(readOnlyCellMap(configData.cellMap))}
         afterMergeCells={(a, b, c) => {
           console.log(a, b, c)
           c || merge(b)
