@@ -135,11 +135,11 @@ const HTable = () => {
         }}
         mergeCells={configData.mergeData} // 合并单元格
         cell={Object.values(readOnlyCellMap(configData.cellMap))}
-        afterMergeCells={(a, b, c) => {
-          console.log(a, b, c)
-          c || merge(b)
-        }}
-        afterUnmergeCells={(cellRange, ifByPlugin) => {console.log(cellRange, ifByPlugin)}}
+        // afterMergeCells={(a, b, c) => {
+        //   console.log(a, b, c)
+        //   c || merge(b)
+        // }}
+        // afterUnmergeCells={(cellRange, ifByPlugin) => {console.log(cellRange, ifByPlugin)}}
         contextMenu // 右键菜单
         height="300"
         stretchH="all"

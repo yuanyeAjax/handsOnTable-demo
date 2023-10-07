@@ -826,7 +826,7 @@ export const runtimeData = {
 }
 
 export const configData = {
-  "mergeData": [],
+  "mergeData": [{ row: 1, col: 0, rowspan: 2, colspan: 1 }],
   "extraConfig": {
       "expandedKeys": [
           "4294967407",
